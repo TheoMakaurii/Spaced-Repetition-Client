@@ -1,13 +1,29 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
+import FlashCardsList from '../../components/FlashCardList'
 
-class LearningRoute extends Component {
-  render() {
-    return (
-      <section>
-        implement and style me
-      </section>
-    );
-  }
+
+export default function LearningRoute(props){
+  // const[flashcards, setFlashCards] = useState(SAMPLE)
+  const flashcards = props.flashcards
+  console.log("Here", props.flashcards)
+  return (
+    <section className='cardStack'>
+      <FlashCardsList flashcards = {flashcards}/>
+    </section>
+  );
+
 }
 
-export default LearningRoute
+let SAMPLE= [
+{
+  id:1,
+  question: 'Konnichiwa',
+  answer: 'Hello'
+},
+{
+  id:2,
+  question: 'Uchi',
+  answer: 'House'
+}
+]
+

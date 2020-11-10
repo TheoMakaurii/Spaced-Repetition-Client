@@ -1,13 +1,21 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
+import FlashCardsList from '../../components/FlashCardList'
+import UserContext from '../../contexts/UserContext'
 
-class DashboardRoute extends Component {
-  render() {
-    return (
-      <section>
-        implement and style me
-      </section>
-    );
+
+export default class DashboardRoute extends React.Component{
+
+  
+  static contextType = UserContext
+  render(){
+  return (
+    <div>
+      Welcome Back {this.context.user.name}!
+    </div>
+  );
+
   }
 }
 
-export default DashboardRoute
+
+

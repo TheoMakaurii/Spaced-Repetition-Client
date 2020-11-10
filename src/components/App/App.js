@@ -8,17 +8,42 @@ import LoginRoute from '../../routes/LoginRoute/LoginRoute'
 import DashboardRoute from '../../routes/DashboardRoute/DashboardRoute'
 import LearningRoute from '../../routes/LearningRoute/LearningRoute'
 import NotFoundRoute from '../../routes/NotFoundRoute/NotFoundRoute'
+import CardsApiService from '../../services/flash-card-service'
 import './App.css'
 
 export default class App extends Component {
-  state = { hasError: false }
+  state = { 
+    cards: [],
+    hasError: false 
+  }
 
   static getDerivedStateFromError(error) {
     console.error(error)
     return { hasError: true }
   }
 
+  getCards = card =>{
+    this.setState({
+      cards: card
+    });
+  };
+
+  componentDidMount() {
+
+    CardsApiService.getYourCards(this.getCards)
+  
+  
+  
+    // this.onClick=e=>{
+    //   e.preventDefault()
+    //   let mealId = parseInt(e.target.id)
+    //   CardssApiService.handleClickDelete(mealId, this.deleteMeal)
+  
+    // };
+  };  
+  
   render() {
+  let flashcards =this.state.cards
     const { hasError } = this.state
     return (
       <div className='App'>
@@ -35,7 +60,7 @@ export default class App extends Component {
             />
             <PrivateRoute
               path={'/learn'}
-              component={LearningRoute}
+              component={(props)=>(<LearningRoute{...props} flashcards={flashcards}/>)}
             />
             <PublicOnlyRoute
               path={'/register'}
